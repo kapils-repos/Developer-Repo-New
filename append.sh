@@ -8,10 +8,10 @@ file2="C:/Git/config-repo/manifest.properties"
 
 git clone $repository1 $localFolder1
 cd $localFolder1
+attributes = cat manifest.txt
 git clone $repository2 $localFolder2
 cd $localFolder2
 echo '--------------------------------------------------------------------' >> manifest.properties
-#cat C:/Git/developer_repo_new/manifest.txt >> C:/Git/config-repo/manifest.properties
-#cd $localFolder2
-#git remote add destination $repository2
-#git push destination master
+echo attributes >> manifest.properties
+git remote add destination $repository2
+git push destination master
