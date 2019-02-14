@@ -7,7 +7,7 @@ localFolder2="C:/Git/config-repo"
 git clone $repository1 $localFolder1
 #git clone $repository2 $localFolder2
 cd $localFolder1
-ls
+ls -lrt
 #cd $localFolder2
 #ls
 #echo '--------------------------------------------------------------------' > C:/Git/config-repo/manifest.properties
