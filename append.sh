@@ -1,8 +1,8 @@
 #/bin/bash
 repository1="https://kapils-repos:Kgithub2019@github.com/kapils-repos/Developer-Repo-New.git"
 repository2="https://kapils-repos:Kgithub2019@github.com/kapils-repos/Config-Repo.git"
-localFolder1="~/Git/developer_repo_new"
-localFolder2="~/Git/config-repo"
+localFolder1="/Git/developer_repo_new"
+localFolder2="/Git/config-repo"
 
 git clone $repository1 $localFolder1
 git clone $repository2 $localFolder2
