@@ -5,11 +5,9 @@ localFolder1="C:/Git/developer_repo_new"
 localFolder2="C:/Git/config-repo"
 
 git clone $repository1 $localFolder1
-#git clone $repository2 $localFolder2
 cd $localFolder1
-ls -lrt
-#cd $localFolder2
-#ls
+git clone $repository2 $localFolder2
+cd $localFolder2
 #echo '--------------------------------------------------------------------' > C:/Git/config-repo/manifest.properties
 #cat C:/Git/developer_repo_new/manifest.txt >> C:/Git/config-repo/manifest.properties
 #cd $localFolder2
