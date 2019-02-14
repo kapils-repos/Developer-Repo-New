@@ -8,7 +8,7 @@ git clone $repository1 $localFolder1
 cd $localFolder1
 git clone $repository2 $localFolder2
 cd $localFolder2
-#echo '--------------------------------------------------------------------' > C:/Git/config-repo/manifest.properties
+echo '--------------------------------------------------------------------' > C:/Git/config-repo/manifest.properties
 #cat C:/Git/developer_repo_new/manifest.txt >> C:/Git/config-repo/manifest.properties
 #cd $localFolder2
 #git remote add destination $repository2
