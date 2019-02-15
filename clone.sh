@@ -4,5 +4,4 @@ repository2="https://kapils-repos:Kgithub2019@github.com/kapils-repos/Config-Rep
 localFolder1="/kapils-repos/Developer-Repo-New"
 localFolder2="/kapils-repos/Config-Repo"
 
-pwd
-ls
+git clone --depth=50 --branch=master $repository2 kapils-repos/Config-Repo
