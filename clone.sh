@@ -4,7 +4,8 @@ repository2="https://kapils-repos:Kgithub2019@github.com/kapils-repos/Config-Rep
 localFolder1="/kapils-repos/Developer-Repo-New"
 localFolder2="/kapils-repos/Config-Repo"
 
-rm -rf "/home/travis/build/kapils-repos"
+rm -rf /home/travis/build/kapils-repos
+cd /home/travis/build
 
 #git clone $repository1
 #git clone $repository2
