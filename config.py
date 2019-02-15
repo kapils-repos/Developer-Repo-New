@@ -8,7 +8,7 @@ attributes = file.read()
 
 print(attributes)
 
-file2 = open("/home/travis/build/kapils-repos/Config-Repo/manifest.properties",'a+')
+file2 = open("/home/travis/build/kapils-repos/Developer-Repo-New/Config-Repo/manifest.properties",'a+')
 file2.write("\n\n---------------------------------------")
 file2.write("\n"+attributes)
 file2.close()
