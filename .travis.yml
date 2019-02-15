@@ -1,5 +1,7 @@
 before_install:
   - echo -e "machine github.com\n  login $GIT_TOKEN" > ~/.netrc
-language: bash
+language: python
+python:
+  - "3.6"
 script:
-    - bash append.sh
+    - python config.py
