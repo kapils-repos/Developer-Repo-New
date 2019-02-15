@@ -10,4 +10,5 @@ cd ..
 cd ..
 git clone $repository2
 pwd
+cd "Developer-Repo-New"
 ls
