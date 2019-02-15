@@ -5,6 +5,7 @@ localFolder1="/home/travis/build/kapils-repos/Developer-Repo-New"
 localFolder2="/home/travis/build/kapils-repos/Config-Repo"
 
 git clone $repository1 $localFolder1
+cd "/home/travis/build/"
 git clone $repository2 $localFolder2
 cd $localFolder1
 pwd
