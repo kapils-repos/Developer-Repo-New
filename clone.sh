@@ -5,4 +5,5 @@ localFolder="Config-Repo"
 
 git clone --depth=50 --branch=master $repository Config-Repo
 cd Config-Repo
+pwd
 ls
