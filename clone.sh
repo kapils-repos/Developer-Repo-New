@@ -10,3 +10,4 @@ cd ..
 cd ..
 git clone $repository2
 pwd
+ls
