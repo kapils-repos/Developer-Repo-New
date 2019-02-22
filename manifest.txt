@@ -2,7 +2,7 @@ File Names:newfile
 Artifact Title:Test
 Public:YES
 Talend Version:7.1.1
-Artifact Version:1.1
+Artifact Version:1.5
 Author:Kapil
 Reviewer:Kapil
 Version:3
