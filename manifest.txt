@@ -1,4 +1,4 @@
-File Names:tiger.jpg,asdasd.ssd
+File Names:newfile
 Artifact Title:Test Title 123
 Public:YES
 Talend Version:7.0.21
