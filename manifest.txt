@@ -1,7 +1,7 @@
 File Names:newfile
-Artifact Title:Test Title 123
+Artifact Title:Test
 Public:YES
-Talend Version:7.0.21
+Talend Version:7.1.1
 Artifact Version:1.1
 Author:Kapil
 Reviewer:Kapil
