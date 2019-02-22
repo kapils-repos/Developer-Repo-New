@@ -12,6 +12,7 @@ print(attributes)
 file2 = open("/home/travis/build/kapils-repos/Developer-Repo-New/Config-Repo/manifest.properties",'a+')
 file2.write("\n\n---------------------------------------")
 file2.write("\n"+attributes)
+file2.write("\nCurrentStatus:Uploaded")
 file2.write("\nUploaded DateTime:"+datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
 file2.close()
 
