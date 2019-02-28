@@ -1,5 +1,4 @@
 ---
-
 Artifact Title:Title1
 File Names:file1.jpg,file2.doc;file3.png
 Created Date:
@@ -14,5 +13,4 @@ Reviewer:
 Last Updated Date:
 Origin Source:CSA Repo
 Destination:CWR Pulic
-
 ---
