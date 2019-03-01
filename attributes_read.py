@@ -10,7 +10,9 @@
 
 import os
 import sys
+import subprocess
 
-out=os.system("sh file.sh")
+answer = subprocess.check_output(['./file.sh'])
+#os.system("sh file.sh")
 print("\n")
-print(out)
+print("Value:{}".format(answer))
