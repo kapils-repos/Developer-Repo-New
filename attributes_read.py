@@ -12,5 +12,5 @@ import os
 import sys
 
 out=os.system("sh file.sh")
-print("\n\n\n\n\n")
+print("\n")
 print(out)
