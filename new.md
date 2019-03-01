@@ -10,7 +10,7 @@ artifactTags: "talend,bigdata,hbase,hive,cloud,coe"
 public: "Yes"
 status: "Approved"
 reviewer: "Kapil Harindran"
-lastUpdatedDate: ""
+lastUpdatedDate: "01-03-2019"
 originSource: "CSA Repo"
 destination: "CWR Pulic"
 ---
