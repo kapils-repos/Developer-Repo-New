@@ -12,10 +12,7 @@ import os
 import sys
 import subprocess
 
-cmd = "git diff --name-only"
+cmd = "git show --name-only --oneline"
 
 output=os.system(cmd)
-
-#data=output.split("\n")
-
-print(output)
+print(output.split("\n")[1])
