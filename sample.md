@@ -6,7 +6,7 @@ product: "dataintegration"
 version: "7.0"
 reviewer: "Kapil Harindran"
 lastReviewedDdate: "02/27/2018"
-latest.revision: 1
+latest.revision: 2
 author: "Kapil Harindran"
 ---
 
