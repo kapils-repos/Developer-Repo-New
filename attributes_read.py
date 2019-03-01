@@ -12,7 +12,8 @@ import os
 import sys
 import subprocess
 
-answer = subprocess.check_output(['file.sh'])
-#os.system("sh file.sh")
-print("\n")
-print("Value:{}".format(answer))
+cmd = "git show --name-only"
+
+output=os.system(cmd)
+
+print(output)
