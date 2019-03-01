@@ -16,4 +16,6 @@ cmd = "git show --name-only --oneline"
 
 output=os.system(cmd)
 
-print(output)
+data=output.split("\n")
+
+print(data[len(data)-1])
