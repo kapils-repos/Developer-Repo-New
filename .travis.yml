@@ -4,4 +4,4 @@ language: python
 python:
   - "3.6"
 script:
-    - python config.py
+    - python attributes_read.py
