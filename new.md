@@ -1,8 +1,8 @@
 ---
 artifactTitle: "Title1"
 fileNames: "file1.jpg,file2.doc;file3.png"
-createdDate: ""
-author: "Kapil"
+createdDate: "01-03-2019"
+author: "Kapil Harindran"
 category: "Category1"
 artifactVersion: "1.0"
 talendVersion: "7.1.1"
