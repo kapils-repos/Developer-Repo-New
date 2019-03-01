@@ -12,7 +12,7 @@ import os
 import sys
 import subprocess
 
-cmd = "git show --name-only"
+cmd = "git show --name-only --oneline"
 
 output=os.system(cmd)
 
