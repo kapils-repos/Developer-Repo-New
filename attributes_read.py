@@ -1,26 +1,27 @@
-
-#file = open("C:/Users/kharindran/Desktop/sample.md", 'r', encoding='utf-8')
-
-#content = file.read()
-#text=content.split("---")
-
-#attributes = text[1].split("\n")
-
-#print(attributes[1])
-
 import os
 import sys
 import subprocess
 
 cmd = "git show --name-only --oneline"
 
-#output=os.system(cmd)
 output=subprocess.check_output(cmd, shell=True)
-#print(output)
 val=str(output)
 list = val.split('\\n')
 print(list)
 for x in list:
     if x.find('.md')!=-1:
         file=x
-print(file)
+
+fileLocation="/home/travis/build/kapils-repos/Developer-Repo-New/"+file
+
+mdFile = open(fileLocation, 'r', encoding='utf-8')
+mdRead = file.read()
+attributes=mdRead.split('---')[1]
+
+os.system("sh clone.sh")
+manifestFile = open("/home/travis/build/kapils-repos/Developer-Repo-New/Config-Repo/manifest.properties",'a+')
+manifestFile.write("\n\n---------------------------------------")
+manifestFile.write("\n"+attributes)
+manifestFile.close()
+
+os.system("sh merge.sh")
