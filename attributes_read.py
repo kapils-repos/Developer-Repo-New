@@ -15,4 +15,9 @@ import subprocess
 cmd = "git show --name-only --oneline"
 
 output=os.system(cmd)
-print(output.split("\n")[1])
+list=str(output).split('\n')
+for x in list:
+    if x.find('.md'):
+        file=x
+
+print(file)
