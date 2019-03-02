@@ -18,7 +18,7 @@ cmd = "git show --name-only --oneline"
 output=subprocess.check_output(cmd, shell=True)
 #print(output)
 val=str(output)
-list = val.split('\n')
+list = val.split('\\n')
 print(list)
 for x in list:
     if x.find('.md'):
