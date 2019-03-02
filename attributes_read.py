@@ -15,7 +15,7 @@ for x in list:
 fileLocation="/home/travis/build/kapils-repos/Developer-Repo-New/"+file
 
 mdFile = open(fileLocation, 'r', encoding='utf-8')
-mdRead = file.read()
+mdRead = mdFile.read()
 attributes=mdRead.split('---')[1]
 
 os.system("sh clone.sh")
