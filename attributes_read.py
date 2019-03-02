@@ -21,6 +21,6 @@ val=str(output)
 list = val.split('\\n')
 print(list)
 for x in list:
-    if x.find('.md'):
+    if x.find('.md')!=-1:
         file=x
 print(file)
