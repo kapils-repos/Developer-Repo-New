@@ -1,0 +1,16 @@
+---
+artifactTitle: "Title1"
+fileNames: "file1.jpg,file2.doc;file3.png"
+createdDate: "01-03-2019"
+author: "Kapil Harindran"
+category: "Category5"
+artifactVersion: "1.7"
+talendVersion: "7.1.1"
+artifactTags: "talend,bigdata,hbase,hive,cloud,coe"
+public: "No"
+status: "Rejected"
+reviewer: "Kapil Harindran"
+lastUpdatedDate: "01-03-2019"
+originSource: "CSA Repo"
+destination: "CWR Pulic"
+---
