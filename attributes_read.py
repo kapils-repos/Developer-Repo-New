@@ -27,6 +27,7 @@ manifestFile.write("createdDate: \""+datetime.datetime.now().strftime('%Y-%m-%d 
 manifestFile.write("\nlastUpdatedDate: \""+datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')+"\"")
 manifestFile.write("\nstatus: \"Created\"")
 manifestFile.write("\nreviewer: \"\"")
+manifestFile.write("\npublic: \"No\"")
 manifestFile.close()
 
 os.system("sh merge.sh")
