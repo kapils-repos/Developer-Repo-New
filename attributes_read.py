@@ -1,6 +1,7 @@
 import os
 import sys
 import subprocess
+import datetime
 
 cmd = "git show --name-only --oneline"
 
@@ -22,6 +23,10 @@ os.system("sh clone.sh")
 manifestFile = open("/home/travis/build/kapils-repos/Developer-Repo-New/Config-Repo/manifest.properties",'a+')
 manifestFile.write("\n\n---------------------------------------")
 manifestFile.write("\n"+attributes)
+manifestFile.write("\ncreatedDate: \""+datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')+"\"")
+manifestFile.write("\nlastUpdatedDate: \""+datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')+"\"")
+manifestFile.write("\nstatus: \"Created\"")
+manifestFile.write("\nreviewer: \"\"")
 manifestFile.close()
 
 os.system("sh merge.sh")
