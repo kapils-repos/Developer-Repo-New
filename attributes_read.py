@@ -9,11 +9,16 @@ output=subprocess.check_output(cmd, shell=True)
 val=str(output)
 list = val.split('\\n')
 print(list)
+files
 for x in list:
+    files = files+x+","
     if x.find('.md')!=-1:
         file=x
 
 fileLocation="/home/travis/build/kapils-repos/Developer-Repo-New/"+file
+
+print(files)
+category=file.split("/")[0]
 
 mdFile = open(fileLocation, 'r', encoding='utf-8')
 mdRead = mdFile.read()
@@ -23,7 +28,9 @@ os.system("sh clone.sh")
 manifestFile = open("/home/travis/build/kapils-repos/Developer-Repo-New/Config-Repo/manifest.properties",'a+')
 manifestFile.write("\n---------------------------------------")
 manifestFile.write("\n"+attributes)
-manifestFile.write("createdDate: \""+datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')+"\"")
+manifestFile.write("fileNames: \""+files)
+manifestFile.write("\ncategory: \""+category)
+manifestFile.write("\ncreatedDate: \""+datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')+"\"")
 manifestFile.write("\nlastUpdatedDate: \""+datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')+"\"")
 manifestFile.write("\nstatus: \"Created\"")
 manifestFile.write("\nreviewer: \"\"")
