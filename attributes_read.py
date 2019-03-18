@@ -9,7 +9,7 @@ output=subprocess.check_output(cmd, shell=True)
 val=str(output)
 list = val.split('\\n')
 print(list)
-files
+files=""
 for x in list:
     files = files+x+","
     if x.find('.md')!=-1:
