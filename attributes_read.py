@@ -11,9 +11,11 @@ list = val.split('\\n')
 print(list)
 files=""
 for x in list:
-    files = files+x+","
     if x.find('.md')!=-1:
         file=x
+
+for i in [1,len(list)-2]:
+    files=files+list[i]
 
 fileLocation="/home/travis/build/kapils-repos/Developer-Repo-New/"+file
 
