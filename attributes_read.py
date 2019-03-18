@@ -16,6 +16,8 @@ for x in list:
 
 for i in [1,len(list)-2]:
     files=files+list[i]
+    if i<len(list)-2:
+        files = files +","
 
 fileLocation="/home/travis/build/kapils-repos/Developer-Repo-New/"+file
 
@@ -30,8 +32,8 @@ os.system("sh clone.sh")
 manifestFile = open("/home/travis/build/kapils-repos/Developer-Repo-New/Config-Repo/manifest.properties",'a+')
 manifestFile.write("\n---------------------------------------")
 manifestFile.write("\n"+attributes)
-manifestFile.write("fileNames: \""+files)
-manifestFile.write("\ncategory: \""+category)
+manifestFile.write("fileNames: \""+files+"\"")
+manifestFile.write("\ncategory: \""+category+"\"")
 manifestFile.write("\ncreatedDate: \""+datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')+"\"")
 manifestFile.write("\nlastUpdatedDate: \""+datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')+"\"")
 manifestFile.write("\nstatus: \"Created\"")
