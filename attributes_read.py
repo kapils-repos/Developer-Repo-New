@@ -14,7 +14,7 @@ for x in list:
     if x.find('.md')!=-1:
         file=x
 
-for i in range(1,len(list)-2):
+for i in range(1,len(list)-1):
     files=files+list[i]
     if i<len(list)-2:
         files = files +","
