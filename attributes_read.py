@@ -57,13 +57,11 @@ os.system("sh clone.sh")
 manifestRead = open("/home/travis/build/kapils-repos/Developer-Repo-New/Config-Repo/manifest.json", 'r')
 
 data = json.load(manifestRead)
-num=""
+num="0000"
 for i in range(0, len(data['artifacts'])):
     artKey=data['artifacts'][i]['artifactKey']
     if key==artKey[:2]:
         num=artKey[2:6]
-    else:
-        num='0000'
 
 artifactKey = keyGen(key,num)
 attrToManifest={}
