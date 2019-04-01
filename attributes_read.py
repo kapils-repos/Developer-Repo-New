@@ -61,6 +61,9 @@ for i in range(0, len(data['artifacts'])):
     artKey=data['artifacts'][i]['artifactKey']
     if key==artKey[:2]:
         val=artKey[2:6]
+    else:
+        val='0000'
+
 artifactKey = keyGen(key,val)
 attrToManifest={}
 attrToManifest["artifactKey"]=artifactKey
