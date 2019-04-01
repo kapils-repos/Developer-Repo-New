@@ -36,7 +36,7 @@ attributes=mdRead.split('---')[1]
 lineVal = attributes.split('\n')
 
 os.system("sh clone.sh")
-manifestRead = open("C:/Users/kharindran/Desktop/CWR Demo/Data Int/manifest_new.json", 'r')
+manifestRead = open('/home/travis/build/kapils-repos/Developer-Repo-New/Config-Repo/manifest.json', 'r')
 
 data = json.load(manifestRead)
 attrToManifest={}
