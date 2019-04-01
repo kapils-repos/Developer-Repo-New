@@ -17,8 +17,8 @@ def checkKey(category):
         key=category[:2]
     return key
 
-def keyGen(key,val):
-    newVal=int(val)+1
+def keyGen(key,num):
+    newVal=int(num)+1
     newVal=str(newVal)
     zeros=""
     for i in range(0, 4-len(newVal)):
@@ -60,11 +60,11 @@ data = json.load(manifestRead)
 for i in range(0, len(data['artifacts'])):
     artKey=data['artifacts'][i]['artifactKey']
     if key==artKey[:2]:
-        val=artKey[2:6]
+        num=artKey[2:6]
     else:
-        val='0000'
+        num='0000'
 
-artifactKey = keyGen(key,val)
+artifactKey = keyGen(key,num)
 attrToManifest={}
 attrToManifest["artifactKey"]=artifactKey
 attrToManifest[lineVal[1].split(':')[0]]=lineVal[1].split(':')[1].strip().replace("\"", "")
