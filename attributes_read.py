@@ -2,6 +2,12 @@ import os
 import sys
 import subprocess
 import datetime
+import json
+
+def writeToJSONFile(data):
+    filePathNameWExt = '/home/travis/build/kapils-repos/Developer-Repo-New/Config-Repo/manifest.json'
+    with open(filePathNameWExt, 'w') as fp:
+        json.dump(data, fp)
 
 cmd = "git show --name-only --oneline"
 
@@ -27,20 +33,28 @@ category=file.split("/")[0]
 mdFile = open(fileLocation, 'r', encoding='utf-8')
 mdRead = mdFile.read()
 attributes=mdRead.split('---')[1]
+lineVal = attributes.split('\n')
 
 os.system("sh clone.sh")
-manifestFile = open("/home/travis/build/kapils-repos/Developer-Repo-New/Config-Repo/manifest.properties",'a+')
-manifestFile.write("\n---------------------------------------")
-manifestFile.write("\n"+attributes)
-manifestFile.write("originSource: \"Developer-Repo\"")
-manifestFile.write("\ndestination: \"\"")
-manifestFile.write("\nfileNames: \""+files+"\"")
-manifestFile.write("\ncategory: \""+category+"\"")
-manifestFile.write("\ncreatedDate: \""+datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')+"\"")
-manifestFile.write("\nlastUpdatedDate: \""+datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')+"\"")
-manifestFile.write("\nstatus: \"Created\"")
-manifestFile.write("\nreviewer: \"\"")
-manifestFile.write("\npublic: \"No\"")
-manifestFile.close()
+manifestRead = open("C:/Users/kharindran/Desktop/CWR Demo/Data Int/manifest_new.json", 'r')
+
+data = json.load(manifestRead)
+attrToManifest={}
+attrToManifest[lineVal[1].split(':')[0]]=lineVal[1].split(':')[1].strip().replace("\"", "")
+attrToManifest[lineVal[2].split(':')[0]]=lineVal[2].split(':')[1].strip().replace("\"", "")
+attrToManifest[lineVal[3].split(':')[0]]=lineVal[3].split(':')[1].strip().replace("\"", "")
+attrToManifest[lineVal[4].split(':')[0]]=lineVal[4].split(':')[1].strip().replace("\"", "")
+attrToManifest["originSource"]="Developer-Repo"
+attrToManifest["destination"]=""
+attrToManifest["fileNames"]=files
+attrToManifest["category"]=category
+attrToManifest["createdDate"]=datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+attrToManifest["lastUpdatedDate"]=datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+attrToManifest["status"]="Created"
+attrToManifest["reviewer"]=""
+attrToManifest["public"]="No"
+data["artifacts"].append(attrToManifest)
+
+writeToJSONFile(data)
 
 os.system("sh merge.sh")
