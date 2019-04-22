@@ -3,6 +3,7 @@ import sys
 import subprocess
 import datetime
 import json
+import requests
 
 def writeToJSONFile(data):
     filePathNameWExt = '/home/travis/build/kapils-repos/Developer-Repo-New/Config-Repo/manifest.json'
