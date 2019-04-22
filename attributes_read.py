@@ -26,6 +26,18 @@ def keyGen(key,num):
     artifactKey=key+zeros+newVal
     return artifactKey
 
+def notification(to_mail, subject, message):
+    print(to_mail+' '+subject+' '+message)
+    headers = {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': 'Basic a2hhcmluZHJhbkBjc2EudGFsZW5kLmNvbTpLQHRhbGVuZGNsb3VkMjAxOA==',
+    }
+    data = '{ \n   "executable": "5cb9afe7d29a2243cd930229", \n   "parameters": {\n     "to": "'+to_mail+'",\n     "subject": "'+subject+'",\n     "message": "'+message+'"\n   }\n }'
+    response = requests.post('https://api.eu.cloud.talend.com/tmc/v1.2/executions', headers=headers, data=data)
+    print('Below is the response code')
+    print(response)
+
 cmd = "git show --name-only --oneline"
 
 output=subprocess.check_output(cmd, shell=True)
@@ -63,6 +75,7 @@ for i in range(0, len(data['artifacts'])):
     if key==artKey[:2]:
         num=artKey[2:6]
 
+
 artifactKey = keyGen(key,num)
 attrToManifest={}
 attrToManifest["artifactKey"]=artifactKey
@@ -84,3 +97,9 @@ data["artifacts"].append(attrToManifest)
 writeToJSONFile(data)
 
 os.system("sh merge.sh")
+
+to=lineVal[2].split(':')[1].strip().replace("\"", "")+'@talend.com'
+subject='CWR Upload Notification'
+message='Hi, Your artifact titled '+lineVal[1].split(':')[1].strip().replace("\"", "")+' has been uploaded. The artifact ID is #'+artifactKey+' and will be published on approval.'
+
+notification(to, subject, message)
