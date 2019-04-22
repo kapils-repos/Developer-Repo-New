@@ -3,5 +3,7 @@ before_install:
 language: python
 python:
   - "3.6"
+install:
+  - pip install requests
 script:
     - python attributes_read.py
