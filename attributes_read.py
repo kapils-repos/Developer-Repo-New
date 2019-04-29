@@ -3,7 +3,6 @@ import sys
 import subprocess
 import datetime
 import json
-import requests
 
 def writeToJSONFile(data):
     filePathNameWExt = '/home/travis/build/kapils-repos/Developer-Repo-New/Config-Repo/manifest.json'
@@ -93,6 +92,7 @@ attrToManifest["lastUpdatedDate"]=datetime.datetime.now().strftime('%Y-%m-%d %H:
 attrToManifest["status"]="Created"
 attrToManifest["reviewer"]=""
 attrToManifest["public"]="No"
+attrToManifest[lineVal[5].split(':')[0]]=lineVal[5].split(':')[1].strip().replace("\"", "")
 data["artifacts"].append(attrToManifest)
 
 writeToJSONFile(data)
