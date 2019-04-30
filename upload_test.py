@@ -103,7 +103,7 @@ if lineVal[1].split(':')[0] != "id":
     newFile.write("\nid: \""+artifactKey+"\"\n")
     newFile.write(attributes)
     newFile.write("---")
-    newFile.write(mdRead.split('---')[2:])
+    newFile.write(mdRead.split('---')[2])
     newFile.close()
 
 
