@@ -101,7 +101,7 @@ if lineVal[1].split(':')[0] != "id":
     os.system("sh developer_repo_clone.sh")
     newFile = open("/home/travis/build/kapils-repos/Developer-Repo-New/Developer-Repo-New/"+category+"/newFile.md","w+")
     newFile.write("---")
-    newFile.write("\nid: \""+artifactKey+"\"\n")
+    newFile.write("\nid: \""+artifactKey+"\"")
     newFile.write(attributes)
     newFile.write("---")
     newFile.write(mdRead.split('---')[2])
@@ -122,4 +122,15 @@ else:
     for i in range(0, l):
         if data['artifacts'][i]['artifactKey']==lineVal[1].split(':')[1].strip().replace("\"", ""):
             print("The id is available "+data['artifacts'][i]['artifactKey'])
+            folder = "/home/travis/build/kapils-repos/Developer-Repo-New/"
+            filesList = files.split(",")
+            newFiles=""
+            for k in filesList:
+                exists = os.path.isfile(folder+k)
+                if exists:
+                    newFiles=newFiles+k+","
 
+            if newFiles.endswith(','):
+                newFiles=newFiles[:-1]
+
+            print("New files are "+newFiles)
