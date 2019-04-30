@@ -117,4 +117,9 @@ if lineVal[1].split(':')[0] != "id":
     subject='CWR Upload Notification'
     message='Hi, Your artifact titled '+lineVal[1].split(':')[1].strip().replace("\"", "")+' has been uploaded. The artifact ID is #'+artifactKey+' and will be published on approval.'
     notification(to, subject, message)
+else:
+    l = len(data['artifacts'])
+    for i in range(0, l):
+        if data['artifacts'][i]['artifactKey']==lineVal[1].split(':')[1].strip().replace("\"", ""):
+            print("The id is available "+data['artifacts'][i]['artifactKey'])
 
