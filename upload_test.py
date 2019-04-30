@@ -98,14 +98,15 @@ if lineVal[1].split(':')[0] != "id":
 
     writeToJSONFile(data)
 
-    newFile = open("/home/travis/build/kapils-repos/Developer-Repo-New/"+category+"/newFile.md","w+")
+    os.system("sh developer_repo_clone.sh")
+    newFile = open("/home/travis/build/kapils-repos/Developer-Repo-New/Developer-Repo-New/"+category+"/newFile.md","w+")
     newFile.write("---")
     newFile.write("\nid: \""+artifactKey+"\"\n")
     newFile.write(attributes)
     newFile.write("---")
     newFile.write(mdRead.split('---')[2])
     newFile.close()
-    
+
     os.system("sh repo_merge.sh")
 
     os.system("sh merge.sh")
