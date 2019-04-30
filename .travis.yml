@@ -6,4 +6,4 @@ python:
 install:
   - pip install requests
 script:
-    - python attributes_read.py
+    - python upload_test.py
