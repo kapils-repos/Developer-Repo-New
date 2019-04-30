@@ -98,7 +98,7 @@ if lineVal[1].split(':')[0] != "id":
 
     writeToJSONFile(data)
 
-    newFile = open("/home/travis/build/kapils-repos/Developer-Repo-New/"+category+"newFile.md","w+")
+    newFile = open("/home/travis/build/kapils-repos/Developer-Repo-New/"+category+"/newFile.md","w+")
     newFile.write("---")
     newFile.write("\nid: \""+artifactKey+"\"\n")
     newFile.write(attributes)
