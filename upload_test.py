@@ -105,8 +105,8 @@ if lineVal[1].split(':')[0] != "id":
     newFile.write("---")
     newFile.write(mdRead.split('---')[2])
     newFile.close()
-
-
+    
+    os.system("sh repo_merge.sh")
 
     os.system("sh merge.sh")
     to=lineVal[2].split(':')[1].strip().replace("\"", "")+'@talend.com'
