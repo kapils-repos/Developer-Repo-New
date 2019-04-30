@@ -1,6 +1,6 @@
 #/bin/bash
 repository="https://kapils-repos:Kgithub2019@github.com/kapils-repos/Developer-Repo-New.git"
-localFolder="/home/travis/build/kapils-repos/Developer-Repo-New"
+localFolder="/home/travis/build/kapils-repos/Developer-Repo-New/Developer-Repo-New/"
 cd $localFolder
 ls
 git status
