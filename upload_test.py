@@ -107,6 +107,9 @@ if lineVal[1].split(':')[0] != "id":
     newFile.write(mdRead.split('---')[2])
     newFile.close()
 
+    os.remove(fileLocation)
+    os.rename("/home/travis/build/kapils-repos/Developer-Repo-New/Developer-Repo-New/"+category+"/newFile.md", "/home/travis/build/kapils-repos/Developer-Repo-New/Developer-Repo-New/"+file)
+
     os.system("sh repo_merge.sh")
 
     os.system("sh merge.sh")
