@@ -143,16 +143,16 @@ else:
 
             print("New files are "+newFiles)
 
-            data['artifacts'][i]['artifactTitle'] = lineVal[2].split(':')[1].strip().replace("\"", "")
+            data['artifacts'][i]['artifactTitle'] = lineVal[3].split(':')[1].strip().replace("\"", "")
             data['artifacts'][i]['artifactVersion'] = version
-            data['artifacts'][i]['talendVersion'] = lineVal[4].split(':')[1].strip().replace("\"", "")
+            data['artifacts'][i]['talendVersion'] = lineVal[5].split(':')[1].strip().replace("\"", "")
             data['artifacts'][i]['destination'] = ""
             data['artifacts'][i]['fileNames'] = newFiles
             data['artifacts'][i]['lastUpdatedDate'] = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             data['artifacts'][i]['status'] = "Updated"
             data['artifacts'][i]['reviewer'] = ""
             data['artifacts'][i]['public'] = "No"
-            data['artifacts'][i]['artifactTags'] = lineVal[5].split(':')[1].strip().replace("\"", "")
+            data['artifacts'][i]['artifactTags'] = lineVal[6].split(':')[1].strip().replace("\"", "")
 
     print(data['artifacts'])
 
@@ -166,10 +166,10 @@ else:
     newFile.write("---")
     newFile.write("\nid: \"" + lineVal[1].split(':')[1].strip().replace("\"", "") + "\"")
     newFile.write("\nartifactVersion: \""+version+"\"")
-    newFile.write("\nartifactTitle: \"" + lineVal[2].split(':')[1].strip().replace("\"", "") + "\"")
-    newFile.write("\nauthor: \"" + lineVal[3].split(':')[1].strip().replace("\"", "") + "\"")
-    newFile.write("\ntalendVersion: \"" + lineVal[4].split(':')[1].strip().replace("\"", "") + "\"")
-    newFile.write("\nartifactTags: \"" + lineVal[5].split(':')[1].strip().replace("\"", "") + "\"")
+    newFile.write("\nartifactTitle: \"" + lineVal[3].split(':')[1].strip().replace("\"", "") + "\"")
+    newFile.write("\nauthor: \"" + lineVal[4].split(':')[1].strip().replace("\"", "") + "\"")
+    newFile.write("\ntalendVersion: \"" + lineVal[5].split(':')[1].strip().replace("\"", "") + "\"")
+    newFile.write("\nartifactTags: \"" + lineVal[6].split(':')[1].strip().replace("\"", "") + "\"")
     newFile.write("\n---")
     newFile.write(mdRead.split('---')[2])
     newFile.close()
@@ -181,8 +181,8 @@ else:
     os.system("sh repo_merge.sh")
 
     os.system("sh merge.sh")
-    to=lineVal[3].split(':')[1].strip().replace("\"", "")+'@talend.com'
+    to=lineVal[4].split(':')[1].strip().replace("\"", "")+'@talend.com'
     subject='CWR Upload Notification'
-    message='Hi, Your updated artifact, titled '+lineVal[2].split(':')[1].strip().replace("\"", "")+' has been uploaded. The artifact ID is #'+lineVal[1].split(':')[1].strip().replace("\"", "")+' and will be published on approval.'
+    message='Hi, Your updated artifact, titled '+lineVal[3].split(':')[1].strip().replace("\"", "")+' has been uploaded. The artifact ID is #'+lineVal[1].split(':')[1].strip().replace("\"", "")+' and will be published on approval.'
     notification(to, subject, message)
 
