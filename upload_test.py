@@ -135,10 +135,13 @@ else :
             if data['artifacts'][i]['artifactKey']==lineVal[1].split(':')[1].strip().replace("\"", ""):
                 print("The id is available "+data['artifacts'][i]['artifactKey'])
                 folder = "/home/travis/build/kapils-repos/Developer-Repo-New/"
+                filesFromConfig=data['artifacts'][i]['fileNames']
+                files = files+","+filesFromConfig
                 filesList = files.split(",")
+                newFileList = set(filesList)
                 newFiles=""
                 version = int(data['artifacts'][i]['artifactVersion'])+1
-                for k in filesList:
+                for k in newFileList:
                     exists = os.path.isfile(folder+k)
                     if exists:
                         newFiles=newFiles+k+","
@@ -149,7 +152,7 @@ else :
                 print("New files are "+newFiles)
 
                 data['artifacts'][i]['artifactTitle'] = lineVal[3].split(':')[1].strip().replace("\"", "")
-                data['artifacts'][i]['artifactVersion'] = version
+                data['artifacts'][i]['artifactVersion'] = "\""+version+"\""
                 data['artifacts'][i]['talendVersion'] = lineVal[5].split(':')[1].strip().replace("\"", "")
                 data['artifacts'][i]['destination'] = ""
                 data['artifacts'][i]['fileNames'] = newFiles
