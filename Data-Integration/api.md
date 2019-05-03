@@ -1,10 +1,11 @@
 ---
 id: "DI0001"
-artifactVersion: "1"
-artifactTitle: "Test FILE"
+artifactVersion: "2"
+artifactTitle: "Test FILE New"
 author: "kharindran"
-talendVersion: "7.0.1"
-artifactTags: "api, apitester"
+talendVersion: "7.1.1"
+artifactTags: "api, apitester, apidemo"
 ---
 
 ##Test MD File
+##New changes
