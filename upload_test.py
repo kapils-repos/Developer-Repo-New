@@ -124,65 +124,73 @@ if lineVal[1].split(':')[0] != "id":
     subject='CWR Upload Notification'
     message='Hi, Your artifact titled '+lineVal[1].split(':')[1].strip().replace("\"", "")+' has been uploaded. The artifact ID is #'+artifactKey+' and will be published on approval.'
     notification(to, subject, message)
-else:
+else :
     l = len(data['artifacts'])
+    flag = "N"
     for i in range(0, l):
-        if data['artifacts'][i]['artifactKey']==lineVal[1].split(':')[1].strip().replace("\"", ""):
-            print("The id is available "+data['artifacts'][i]['artifactKey'])
-            folder = "/home/travis/build/kapils-repos/Developer-Repo-New/"
-            filesList = files.split(",")
-            newFiles=""
-            version = int(data['artifacts'][i]['artifactVersion'])+1
-            for k in filesList:
-                exists = os.path.isfile(folder+k)
-                if exists:
-                    newFiles=newFiles+k+","
+        if data['artifacts'][i]['artifactKey']==lineVal[1].split(':')[1].strip().replace("\"", "") && data['artifacts'][i]['artifactVersion']<lineVal[2].split(':')[1].strip().replace("\"", ""):
+            flag = "Y"
+    if flag=="Y":
+        for i in range(0, l):
+            if data['artifacts'][i]['artifactKey']==lineVal[1].split(':')[1].strip().replace("\"", ""):
+                print("The id is available "+data['artifacts'][i]['artifactKey'])
+                folder = "/home/travis/build/kapils-repos/Developer-Repo-New/"
+                filesList = files.split(",")
+                newFiles=""
+                version = int(data['artifacts'][i]['artifactVersion'])+1
+                for k in filesList:
+                    exists = os.path.isfile(folder+k)
+                    if exists:
+                        newFiles=newFiles+k+","
 
-            if newFiles.endswith(','):
-                newFiles=newFiles[:-1]
+                if newFiles.endswith(','):
+                    newFiles=newFiles[:-1]
 
-            print("New files are "+newFiles)
+                print("New files are "+newFiles)
 
-            data['artifacts'][i]['artifactTitle'] = lineVal[3].split(':')[1].strip().replace("\"", "")
-            data['artifacts'][i]['artifactVersion'] = version
-            data['artifacts'][i]['talendVersion'] = lineVal[5].split(':')[1].strip().replace("\"", "")
-            data['artifacts'][i]['destination'] = ""
-            data['artifacts'][i]['fileNames'] = newFiles
-            data['artifacts'][i]['lastUpdatedDate'] = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-            data['artifacts'][i]['status'] = "Updated"
-            data['artifacts'][i]['reviewer'] = ""
-            data['artifacts'][i]['public'] = "No"
-            data['artifacts'][i]['artifactTags'] = lineVal[6].split(':')[1].strip().replace("\"", "")
+                data['artifacts'][i]['artifactTitle'] = lineVal[3].split(':')[1].strip().replace("\"", "")
+                data['artifacts'][i]['artifactVersion'] = version
+                data['artifacts'][i]['talendVersion'] = lineVal[5].split(':')[1].strip().replace("\"", "")
+                data['artifacts'][i]['destination'] = ""
+                data['artifacts'][i]['fileNames'] = newFiles
+                data['artifacts'][i]['lastUpdatedDate'] = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+                data['artifacts'][i]['status'] = "Updated"
+                data['artifacts'][i]['reviewer'] = ""
+                data['artifacts'][i]['public'] = "No"
+                data['artifacts'][i]['artifactTags'] = lineVal[6].split(':')[1].strip().replace("\"", "")
 
-    print(data['artifacts'])
+        print(data['artifacts'])
 
-    writeToNewJSONFile(data)
-    os.remove('/home/travis/build/kapils-repos/Developer-Repo-New/Config-Repo/manifest.json')
-    os.rename('/home/travis/build/kapils-repos/Developer-Repo-New/Config-Repo/manifest_new.json',
-              '/home/travis/build/kapils-repos/Developer-Repo-New/Config-Repo/manifest.json')
+        writeToNewJSONFile(data)
+        os.remove('/home/travis/build/kapils-repos/Developer-Repo-New/Config-Repo/manifest.json')
+        os.rename('/home/travis/build/kapils-repos/Developer-Repo-New/Config-Repo/manifest_new.json',
+                  '/home/travis/build/kapils-repos/Developer-Repo-New/Config-Repo/manifest.json')
 
-    os.system("sh developer_repo_clone.sh")
-    newFile = open("/home/travis/build/kapils-repos/Developer-Repo-New/Developer-Repo-New/" + category + "/newFile.md", "w+")
-    newFile.write("---")
-    newFile.write("\nid: \"" + lineVal[1].split(':')[1].strip().replace("\"", "") + "\"")
-    newFile.write("\nartifactVersion: \""+str(version)+"\"")
-    newFile.write("\nartifactTitle: \"" + lineVal[3].split(':')[1].strip().replace("\"", "") + "\"")
-    newFile.write("\nauthor: \"" + lineVal[4].split(':')[1].strip().replace("\"", "") + "\"")
-    newFile.write("\ntalendVersion: \"" + lineVal[5].split(':')[1].strip().replace("\"", "") + "\"")
-    newFile.write("\nartifactTags: \"" + lineVal[6].split(':')[1].strip().replace("\"", "") + "\"")
-    newFile.write("\n---")
-    newFile.write(mdRead.split('---')[2])
-    newFile.close()
+        os.system("sh developer_repo_clone.sh")
+        newFile = open("/home/travis/build/kapils-repos/Developer-Repo-New/Developer-Repo-New/" + category + "/newFile.md", "w+")
+        newFile.write("---")
+        newFile.write("\nid: \"" + lineVal[1].split(':')[1].strip().replace("\"", "") + "\"")
+        newFile.write("\nartifactVersion: \""+str(version)+"\"")
+        newFile.write("\nartifactTitle: \"" + lineVal[3].split(':')[1].strip().replace("\"", "") + "\"")
+        newFile.write("\nauthor: \"" + lineVal[4].split(':')[1].strip().replace("\"", "") + "\"")
+        newFile.write("\ntalendVersion: \"" + lineVal[5].split(':')[1].strip().replace("\"", "") + "\"")
+        newFile.write("\nartifactTags: \"" + lineVal[6].split(':')[1].strip().replace("\"", "") + "\"")
+        newFile.write("\n---")
+        newFile.write(mdRead.split('---')[2])
+        newFile.close()
 
-    os.remove(fileLocation)
-    os.rename("/home/travis/build/kapils-repos/Developer-Repo-New/Developer-Repo-New/" + category + "/newFile.md",
-              "/home/travis/build/kapils-repos/Developer-Repo-New/Developer-Repo-New/" + file)
+        os.remove(fileLocation)
+        os.rename("/home/travis/build/kapils-repos/Developer-Repo-New/Developer-Repo-New/" + category + "/newFile.md",
+                  "/home/travis/build/kapils-repos/Developer-Repo-New/Developer-Repo-New/" + file)
 
-    os.system("sh repo_merge.sh")
+        os.system("sh repo_merge.sh")
 
-    os.system("sh merge.sh")
-    to=lineVal[4].split(':')[1].strip().replace("\"", "")+'@talend.com'
-    subject='CWR Upload Notification'
-    message='Hi, Your updated artifact, titled '+lineVal[3].split(':')[1].strip().replace("\"", "")+' has been uploaded. The artifact ID is #'+lineVal[1].split(':')[1].strip().replace("\"", "")+' and will be published on approval.'
-    notification(to, subject, message)
+        os.system("sh merge.sh")
+        to=lineVal[4].split(':')[1].strip().replace("\"", "")+'@talend.com'
+        subject='CWR Upload Notification'
+        message='Hi, Your updated artifact, titled '+lineVal[3].split(':')[1].strip().replace("\"", "")+' has been uploaded. The artifact ID is #'+lineVal[1].split(':')[1].strip().replace("\"", "")+' and will be published on approval.'
+        notification(to, subject, message)
+
+    else:
+        print("Artifact version is the latest")
 
