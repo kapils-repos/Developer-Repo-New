@@ -152,7 +152,7 @@ else :
                 print("New files are "+newFiles)
 
                 data['artifacts'][i]['artifactTitle'] = lineVal[3].split(':')[1].strip().replace("\"", "")
-                data['artifacts'][i]['artifactVersion'] = "\""+version+"\""
+                data['artifacts'][i]['artifactVersion'] = str(version)
                 data['artifacts'][i]['talendVersion'] = lineVal[5].split(':')[1].strip().replace("\"", "")
                 data['artifacts'][i]['destination'] = ""
                 data['artifacts'][i]['fileNames'] = newFiles
