@@ -10,6 +10,11 @@ def writeToJSONFile(data):
     with open(filePathNameWExt, 'w') as fp:
         json.dump(data, fp)
 
+def writeToNewJSONFile(data):
+    filePathNameWExt = '/home/travis/build/kapils-repos/Developer-Repo-New/Config-Repo/manifest_new.json'
+    with open(filePathNameWExt, 'w') as fp:
+        json.dump(data, fp)
+
 def checkKey(category):
     if '-' in category:
         catSplit=category.split('-')
@@ -103,6 +108,7 @@ if lineVal[1].split(':')[0] != "id":
     newFile = open("/home/travis/build/kapils-repos/Developer-Repo-New/Developer-Repo-New/"+category+"/newFile.md","w+")
     newFile.write("---")
     newFile.write("\nid: \""+artifactKey+"\"")
+    newFile.write("\nartifactVersion: \"1\"")
     newFile.write(attributes)
     newFile.write("---")
     newFile.write(mdRead.split('---')[2])
@@ -149,3 +155,34 @@ else:
             data['artifacts'][i]['artifactTags'] = lineVal[5].split(':')[1].strip().replace("\"", "")
 
     print(data['artifacts'])
+
+    writeToNewJSONFile(data)
+    os.remove('/home/travis/build/kapils-repos/Developer-Repo-New/Config-Repo/manifest.json')
+    os.rename('/home/travis/build/kapils-repos/Developer-Repo-New/Config-Repo/manifest_new.json',
+              '/home/travis/build/kapils-repos/Developer-Repo-New/Config-Repo/manifest.json')
+
+    newFile = open("/home/travis/build/kapils-repos/Developer-Repo-New/Developer-Repo-New/" + category + "/newFile.md",
+                   "w+")
+    newFile.write("---")
+    newFile.write("\nid: \"" + lineVal[1].split(':')[1].strip().replace("\"", "") + "\"")
+    newFile.write("\nartifactVersion: \""+version+"\"")
+    newFile.write("\nartifactTitle: \"" + lineVal[2].split(':')[1].strip().replace("\"", "") + "\"")
+    newFile.write("\nauthor: \"" + lineVal[3].split(':')[1].strip().replace("\"", "") + "\"")
+    newFile.write("\ntalendVersion: \"" + lineVal[4].split(':')[1].strip().replace("\"", "") + "\"")
+    newFile.write("\nartifactTags: \"" + lineVal[5].split(':')[1].strip().replace("\"", "") + "\"")
+    newFile.write("\n---")
+    newFile.write(mdRead.split('---')[2])
+    newFile.close()
+
+    os.remove(fileLocation)
+    os.rename("/home/travis/build/kapils-repos/Developer-Repo-New/Developer-Repo-New/" + category + "/newFile.md",
+              "/home/travis/build/kapils-repos/Developer-Repo-New/Developer-Repo-New/" + file)
+
+    os.system("sh repo_merge.sh")
+
+    os.system("sh merge.sh")
+    to=lineVal[3].split(':')[1].strip().replace("\"", "")+'@talend.com'
+    subject='CWR Upload Notification'
+    message='Hi, Your updated artifact, titled '+lineVal[2].split(':')[1].strip().replace("\"", "")+' has been uploaded. The artifact ID is #'+lineVal[1].split(':')[1].strip().replace("\"", "")+' and will be published on approval.'
+    notification(to, subject, message)
+
