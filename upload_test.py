@@ -161,8 +161,8 @@ else:
     os.rename('/home/travis/build/kapils-repos/Developer-Repo-New/Config-Repo/manifest_new.json',
               '/home/travis/build/kapils-repos/Developer-Repo-New/Config-Repo/manifest.json')
 
-    newFile = open("/home/travis/build/kapils-repos/Developer-Repo-New/Developer-Repo-New/" + category + "/newFile.md",
-                   "w+")
+    os.system("sh developer_repo_clone.sh")
+    newFile = open("/home/travis/build/kapils-repos/Developer-Repo-New/Developer-Repo-New/" + category + "/newFile.md", "w+")
     newFile.write("---")
     newFile.write("\nid: \"" + lineVal[1].split(':')[1].strip().replace("\"", "") + "\"")
     newFile.write("\nartifactVersion: \""+version+"\"")
