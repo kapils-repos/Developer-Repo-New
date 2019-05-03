@@ -1,6 +1,6 @@
 ---
 id: "MD0001"
-artifactVersion: "2"
+artifactVersion: "3"
 artifactTitle: "MDM"
 author: "kharindran"
 talendVersion: "7.0.1"
