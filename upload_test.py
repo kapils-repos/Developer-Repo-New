@@ -165,7 +165,7 @@ else:
     newFile = open("/home/travis/build/kapils-repos/Developer-Repo-New/Developer-Repo-New/" + category + "/newFile.md", "w+")
     newFile.write("---")
     newFile.write("\nid: \"" + lineVal[1].split(':')[1].strip().replace("\"", "") + "\"")
-    newFile.write("\nartifactVersion: \""+version+"\"")
+    newFile.write("\nartifactVersion: \""+str(version)+"\"")
     newFile.write("\nartifactTitle: \"" + lineVal[3].split(':')[1].strip().replace("\"", "") + "\"")
     newFile.write("\nauthor: \"" + lineVal[4].split(':')[1].strip().replace("\"", "") + "\"")
     newFile.write("\ntalendVersion: \"" + lineVal[5].split(':')[1].strip().replace("\"", "") + "\"")
