@@ -69,6 +69,7 @@ os.system("sh clone.sh")
 manifestRead = open("/home/travis/build/kapils-repos/Developer-Repo-New/Config-Repo/manifest.json", 'r')
 data = json.load(manifestRead)
 
+
 if lineVal[1].split(':')[0] != "id":
     key = checkKey(category)
     num="0000"
@@ -82,8 +83,8 @@ if lineVal[1].split(':')[0] != "id":
     attrToManifest["artifactKey"]=artifactKey
     attrToManifest[lineVal[1].split(':')[0]]=lineVal[1].split(':')[1].strip().replace("\"", "")
     attrToManifest[lineVal[2].split(':')[0]]=lineVal[2].split(':')[1].strip().replace("\"", "")
+    attrToManifest["artifactVersion"]="1"
     attrToManifest[lineVal[3].split(':')[0]]=lineVal[3].split(':')[1].strip().replace("\"", "")
-    attrToManifest[lineVal[4].split(':')[0]]=lineVal[4].split(':')[1].strip().replace("\"", "")
     attrToManifest["originSource"]="Developer-Repo"
     attrToManifest["destination"]=""
     attrToManifest["fileNames"]=files
@@ -93,7 +94,7 @@ if lineVal[1].split(':')[0] != "id":
     attrToManifest["status"]="Created"
     attrToManifest["reviewer"]=""
     attrToManifest["public"]="No"
-    attrToManifest[lineVal[5].split(':')[0]]=lineVal[5].split(':')[1].strip().replace("\"", "")
+    attrToManifest[lineVal[4].split(':')[0]]=lineVal[4].split(':')[1].strip().replace("\"", "")
     data["artifacts"].append(attrToManifest)
 
     writeToJSONFile(data)
@@ -125,6 +126,7 @@ else:
             folder = "/home/travis/build/kapils-repos/Developer-Repo-New/"
             filesList = files.split(",")
             newFiles=""
+            version = int(data['artifacts'][i]['artifactVersion'])+1
             for k in filesList:
                 exists = os.path.isfile(folder+k)
                 if exists:
@@ -134,3 +136,16 @@ else:
                 newFiles=newFiles[:-1]
 
             print("New files are "+newFiles)
+
+            data['artifacts'][i]['artifactTitle'] = lineVal[2].split(':')[1].strip().replace("\"", "")
+            data['artifacts'][i]['artifactVersion'] = version
+            data['artifacts'][i]['talendVersion'] = lineVal[4].split(':')[1].strip().replace("\"", "")
+            data['artifacts'][i]['destination'] = ""
+            data['artifacts'][i]['fileNames'] = newFiles
+            data['artifacts'][i]['lastUpdatedDate'] = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+            data['artifacts'][i]['status'] = "Updated"
+            data['artifacts'][i]['reviewer'] = ""
+            data['artifacts'][i]['public'] = "No"
+            data['artifacts'][i]['artifactTags'] = lineVal[5].split(':')[1].strip().replace("\"", "")
+
+    print(data['artifacts'])
