@@ -128,7 +128,7 @@ else :
     l = len(data['artifacts'])
     flag = "N"
     for i in range(0, l):
-        if data['artifacts'][i]['artifactKey']==lineVal[1].split(':')[1].strip().replace("\"", "") && data['artifacts'][i]['artifactVersion']<lineVal[2].split(':')[1].strip().replace("\"", ""):
+        if data['artifacts'][i]['artifactKey']==lineVal[1].split(':')[1].strip().replace("\"", "") and data['artifacts'][i]['artifactVersion']<lineVal[2].split(':')[1].strip().replace("\"", ""):
             flag = "Y"
     if flag=="Y":
         for i in range(0, l):
