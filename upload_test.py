@@ -195,5 +195,5 @@ else :
         notification(to, subject, message)
 
     else:
-        print("Artifact version is the latest")
+        print("Latest version of the artifact is available")
 
