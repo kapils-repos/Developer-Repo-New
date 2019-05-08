@@ -1,4 +1,6 @@
 ---
+id: "DS0001"
+artifactVersion: "1"
 artifactTitle: "Big Data"
 author: "kharindran"
 talendVersion: "6.5.1"
