@@ -56,9 +56,7 @@ def getUsername(hash_code):
         'https://api.github.com/repos/kapils-repos/Developer-Repo-New/commits/'+hash_code,auth=('kapils-repos', 'Kgithub2019'))
     data=response.content
     json_data=json.loads(data)
-    print(json_data)
-    print(json_data['commit']['author']['name'])
-    return json_data['commit']['author']['name']
+    return json_data['commit']['author']['name'].rstrip("-talend")
 
 
 #Command to get the latest commit details
