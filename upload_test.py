@@ -5,16 +5,19 @@ import subprocess
 import datetime
 import json
 
+#Function to write the attributes to the existing JSON file
 def writeToJSONFile(data):
     filePathNameWExt = '/home/travis/build/kapils-repos/Developer-Repo-New/Config-Repo/manifest.json'
     with open(filePathNameWExt, 'w') as fp:
         json.dump(data, fp)
 
+#Function to write the attributes to a new JSON file
 def writeToNewJSONFile(data):
     filePathNameWExt = '/home/travis/build/kapils-repos/Developer-Repo-New/Config-Repo/manifest_new.json'
     with open(filePathNameWExt, 'w') as fp:
         json.dump(data, fp)
 
+#Function to check the category and generate the key code
 def checkKey(category):
     if '-' in category:
         catSplit=category.split('-')
@@ -23,6 +26,7 @@ def checkKey(category):
         key=category[:2]
     return key
 
+#Function to generate artifact key comparing the existing keys available
 def keyGen(key,num):
     newVal=int(num)+1
     newVal=str(newVal)
@@ -32,6 +36,7 @@ def keyGen(key,num):
     artifactKey=key+zeros+newVal
     return artifactKey
 
+#Function to trigger a mail to the contributor
 def notification(to_mail, subject, message):
     print(to_mail+' '+subject+' '+message)
     headers = {
@@ -44,7 +49,23 @@ def notification(to_mail, subject, message):
     print('Below is the response code')
     print(response)
 
+
+def getUsername(hash_code):
+    response = requests.get(
+        'https://api.github.com/repos/kapils-repos/Developer-Repo-New/commits/'+hash_code)
+    data=response.content
+    json_data=json.loads(data)
+    return json_data['commit']['author']['name']
+
+
+#Command to get the latest commit details
 cmd = "git show --name-only --oneline"
+hash_code_cmd = "git rev-parse HEAD"
+
+hash=subprocess.check_output(hash_code_cmd, shell=True)
+hash_code=str(hash)
+userName=getUsername(hash_code)
+print("Ussername is "+userName)
 
 output=subprocess.check_output(cmd, shell=True)
 val=str(output)
@@ -74,7 +95,7 @@ os.system("sh clone.sh")
 manifestRead = open("/home/travis/build/kapils-repos/Developer-Repo-New/Config-Repo/manifest.json", 'r')
 data = json.load(manifestRead)
 
-
+#Check if the .md file already has an id generated
 if lineVal[1].split(':')[0] != "id":
     key = checkKey(category)
     num="0000"
@@ -195,5 +216,5 @@ else :
         notification(to, subject, message)
 
     else:
-        print("Latest version of the artifact is available")
+        print("Artifact version is the latest")
 
