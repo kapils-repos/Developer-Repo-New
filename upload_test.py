@@ -66,7 +66,10 @@ cmd = "git show --name-only --oneline"
 hash_code_cmd = "git rev-parse HEAD"
 
 hash=subprocess.check_output(hash_code_cmd, shell=True)
-hash_code=str(hash)
+hash_code_str=str(hash)
+hash_code_str=hash_code_str.replace("b'",'')
+hash_code=hash_code_str.replace("\n'",'')
+
 userName=getUsername(hash_code)
 print("Ussername is "+userName)
 
