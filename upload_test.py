@@ -51,6 +51,7 @@ def notification(to_mail, subject, message):
 
 
 def getUsername(hash_code):
+    print("The hashcode is "+hash_code)
     response = requests.get(
         'https://api.github.com/repos/kapils-repos/Developer-Repo-New/commits/'+hash_code,auth=('kapils-repos', 'Kgithub2019'))
     data=response.content
