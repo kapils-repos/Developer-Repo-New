@@ -55,6 +55,8 @@ def getUsername(hash_code):
         'https://api.github.com/repos/kapils-repos/Developer-Repo-New/commits/'+hash_code)
     data=response.content
     json_data=json.loads(data)
+    print(json_data)
+    print(json_data['commit']['author']['name'])
     return json_data['commit']['author']['name']
 
 
