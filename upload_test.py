@@ -121,6 +121,7 @@ if lineVal[1].split(':')[0] != "id":
     attrToManifest["lastUpdatedDate"]=datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     attrToManifest["status"]="Created"
     attrToManifest["reviewer"]=""
+    attrToManifest["reviewerComments"]=""
     attrToManifest["public"]="No"
     attrToManifest[lineVal[3].split(':')[0]]=lineVal[3].split(':')[1].strip().replace("\"", "")
     data["artifacts"].append(attrToManifest)
