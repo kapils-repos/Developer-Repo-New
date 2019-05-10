@@ -56,7 +56,7 @@ def getUsername(hash_code):
         'https://api.github.com/repos/kapils-repos/Developer-Repo-New/commits/'+hash_code,auth=('kapils-repos', 'Kgithub2019'))
     data=response.content
     json_data=json.loads(data)
-    return json_data['commit']['author']['name'].replace("-talend","")
+    return json_data['commit']['author']['name'].rstrip("-talend")
 
 
 #Command to get the latest commit details
@@ -110,9 +110,9 @@ if lineVal[1].split(':')[0] != "id":
     attrToManifest={}
     attrToManifest["artifactKey"]=artifactKey
     attrToManifest[lineVal[1].split(':')[0]]=lineVal[1].split(':')[1].strip().replace("\"", "")
-    attrToManifest[lineVal[2].split(':')[0]]=lineVal[2].split(':')[1].strip().replace("\"", "")
+    attrToManifest["author"]=userName
     attrToManifest["artifactVersion"]="1"
-    attrToManifest[lineVal[3].split(':')[0]]=lineVal[3].split(':')[1].strip().replace("\"", "")
+    attrToManifest[lineVal[2].split(':')[0]]=lineVal[2].split(':')[1].strip().replace("\"", "")
     attrToManifest["originSource"]="Developer-Repo"
     attrToManifest["destination"]=""
     attrToManifest["fileNames"]=files
@@ -122,7 +122,7 @@ if lineVal[1].split(':')[0] != "id":
     attrToManifest["status"]="Created"
     attrToManifest["reviewer"]=""
     attrToManifest["public"]="No"
-    attrToManifest[lineVal[4].split(':')[0]]=lineVal[4].split(':')[1].strip().replace("\"", "")
+    attrToManifest[lineVal[3].split(':')[0]]=lineVal[3].split(':')[1].strip().replace("\"", "")
     data["artifacts"].append(attrToManifest)
 
     writeToJSONFile(data)
@@ -131,8 +131,9 @@ if lineVal[1].split(':')[0] != "id":
     newFile = open("/home/travis/build/kapils-repos/Developer-Repo-New/Developer-Repo-New/"+category+"/newFile.md","w+")
     newFile.write("---")
     newFile.write("\nid: \""+artifactKey+"\"")
-    newFile.write("\nartifactVersion: \"1\"")
     newFile.write(attributes)
+    newFile.write("\nauthor: \""+userName+"\"")
+    newFile.write("\nartifactVersion: \"1\"")
     newFile.write("---")
     newFile.write(mdRead.split('---')[2])
     newFile.close()
@@ -143,7 +144,7 @@ if lineVal[1].split(':')[0] != "id":
     os.system("sh repo_merge.sh")
 
     os.system("sh merge.sh")
-    to=lineVal[2].split(':')[1].strip().replace("\"", "")+'@talend.com'
+    to=userName+'@talend.com'
     subject='CWR Upload Notification'
     message='Hi, Your artifact titled '+lineVal[1].split(':')[1].strip().replace("\"", "")+' has been uploaded. The artifact ID is #'+artifactKey+' and will be published on approval.'
     notification(to, subject, message)
@@ -151,7 +152,7 @@ else :
     l = len(data['artifacts'])
     flag = "N"
     for i in range(0, l):
-        if data['artifacts'][i]['artifactKey']==lineVal[1].split(':')[1].strip().replace("\"", "") and int(data['artifacts'][i]['artifactVersion'])<int(lineVal[2].split(':')[1].strip().replace("\"", "")):
+        if data['artifacts'][i]['artifactKey']==lineVal[1].split(':')[1].strip().replace("\"", "") and int(data['artifacts'][i]['artifactVersion'])<int(lineVal[6].split(':')[1].strip().replace("\"", "")):
             flag = "Y"
     if flag=="Y":
         for i in range(0, l):
@@ -174,16 +175,16 @@ else :
 
                 print("New files are "+newFiles)
 
-                data['artifacts'][i]['artifactTitle'] = lineVal[3].split(':')[1].strip().replace("\"", "")
+                data['artifacts'][i]['artifactTitle'] = lineVal[2].split(':')[1].strip().replace("\"", "")
                 data['artifacts'][i]['artifactVersion'] = str(version)
-                data['artifacts'][i]['talendVersion'] = lineVal[5].split(':')[1].strip().replace("\"", "")
+                data['artifacts'][i]['talendVersion'] = lineVal[3].split(':')[1].strip().replace("\"", "")
                 data['artifacts'][i]['destination'] = ""
                 data['artifacts'][i]['fileNames'] = newFiles
                 data['artifacts'][i]['lastUpdatedDate'] = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
                 data['artifacts'][i]['status'] = "Updated"
                 data['artifacts'][i]['reviewer'] = ""
                 data['artifacts'][i]['public'] = "No"
-                data['artifacts'][i]['artifactTags'] = lineVal[6].split(':')[1].strip().replace("\"", "")
+                data['artifacts'][i]['artifactTags'] = lineVal[4].split(':')[1].strip().replace("\"", "")
 
         print(data['artifacts'])
 
@@ -196,11 +197,11 @@ else :
         newFile = open("/home/travis/build/kapils-repos/Developer-Repo-New/Developer-Repo-New/" + category + "/newFile.md", "w+")
         newFile.write("---")
         newFile.write("\nid: \"" + lineVal[1].split(':')[1].strip().replace("\"", "") + "\"")
-        newFile.write("\nartifactVersion: \""+str(version)+"\"")
-        newFile.write("\nartifactTitle: \"" + lineVal[3].split(':')[1].strip().replace("\"", "") + "\"")
-        newFile.write("\nauthor: \"" + lineVal[4].split(':')[1].strip().replace("\"", "") + "\"")
-        newFile.write("\ntalendVersion: \"" + lineVal[5].split(':')[1].strip().replace("\"", "") + "\"")
-        newFile.write("\nartifactTags: \"" + lineVal[6].split(':')[1].strip().replace("\"", "") + "\"")
+        newFile.write("\nartifactTitle: \"" + lineVal[2].split(':')[1].strip().replace("\"", "") + "\"")
+        newFile.write("\ntalendVersion: \"" + lineVal[3].split(':')[1].strip().replace("\"", "") + "\"")
+        newFile.write("\nartifactTags: \"" + lineVal[4].split(':')[1].strip().replace("\"", "") + "\"")
+        newFile.write("\nauthor: \"" + lineVal[5].split(':')[1].strip().replace("\"", "") + "\"")
+        newFile.write("\nartifactVersion: \"" + str(version) + "\"")
         newFile.write("\n---")
         newFile.write(mdRead.split('---')[2])
         newFile.close()
@@ -212,9 +213,9 @@ else :
         os.system("sh repo_merge.sh")
 
         os.system("sh merge.sh")
-        to=lineVal[4].split(':')[1].strip().replace("\"", "")+'@talend.com'
+        to=lineVal[5].split(':')[1].strip().replace("\"", "")+'@talend.com'
         subject='CWR Upload Notification'
-        message='Hi, Your updated artifact, titled '+lineVal[3].split(':')[1].strip().replace("\"", "")+' has been uploaded. The artifact ID is #'+lineVal[1].split(':')[1].strip().replace("\"", "")+' and will be published on approval.'
+        message='Hi, Your updated artifact, titled '+lineVal[2].split(':')[1].strip().replace("\"", "")+' has been uploaded. The artifact ID is #'+lineVal[1].split(':')[1].strip().replace("\"", "")+' and will be published on approval.'
         notification(to, subject, message)
 
     else:
