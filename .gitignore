@@ -1,7 +1,0 @@
-.travis.yml
-attributes_read.py
-clone.sh
-developer_repo_clone.sh
-merge.sh
-repo_merge.sh
-upload_test.py
