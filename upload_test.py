@@ -132,9 +132,9 @@ if lineVal[1].split(':')[0] != "id":
     newFile.write("---")
     newFile.write("\nid: \""+artifactKey+"\"")
     newFile.write(attributes)
-    newFile.write("\nauthor: \""+userName+"\"")
+    newFile.write("author: \""+userName+"\"")
     newFile.write("\nartifactVersion: \"1\"")
-    newFile.write("---")
+    newFile.write("\n---")
     newFile.write(mdRead.split('---')[2])
     newFile.close()
 
