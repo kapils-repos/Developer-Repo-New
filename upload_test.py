@@ -118,7 +118,7 @@ if lineVal[1].split(':')[0] != "id":
         if i < len(file_arr) - 2:
             files_new = files_new + ","
 
-    print(files_new)
+    print("New files are: "+files_new)
 
     attrToManifest={}
     attrToManifest["artifactKey"]=artifactKey
