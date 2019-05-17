@@ -6,4 +6,4 @@ python:
 install:
   - pip install requests
 script:
-    - python upload_test.py
+    - python upload_test.py $GIT_PASSWORD
