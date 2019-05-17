@@ -58,6 +58,8 @@ def getUsername(hash_code):
     json_data=json.loads(data)
     return json_data['commit']['author']['name'].replace("-talend","")
 
+password=sys.argv[0]
+print(password)
 
 #Command to get the latest commit details
 cmd = "git show --name-only --oneline"
