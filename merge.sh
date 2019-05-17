@@ -8,4 +8,5 @@ git status
 git add .
 git commit -m "Updated the manifest.properties file"
 git remote add destination $repository
+git pull
 git push destination master
