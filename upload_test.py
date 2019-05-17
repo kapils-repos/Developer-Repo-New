@@ -110,15 +110,15 @@ if lineVal[1].split(':')[0] != "id":
 
     artifactKey = keyGen(key,num)
 
-    files_new = ""
-    file_arr = files.split(',')
+    #files_new = ""
+    #file_arr = files.split(',')
 
-    for i in range(1, len(file_arr) - 1):
-        files_new = file_arr[i].replace('/', '/'+artifactKey+'/')
-        if i < len(file_arr) - 2:
-            files_new = files_new + ","
+    #for i in range(0, len(file_arr)):
+     #   files_new = file_arr[i].replace('/', '/'+artifactKey+'/')
+      #  if i < len(file_arr) - 1:
+       #     files_new = files_new + ","
 
-    print("New files are: "+files_new)
+    #print(files_new)
 
     attrToManifest={}
     attrToManifest["artifactKey"]=artifactKey
