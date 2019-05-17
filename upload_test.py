@@ -58,8 +58,7 @@ def getUsername(hash_code):
     json_data=json.loads(data)
     return json_data['commit']['author']['name'].replace("-talend","")
 
-git_pass=sys.argv[1]
-print("Git password is "+git_pass)
+git_password=sys.argv[1]
 
 #Command to get the latest commit details
 cmd = "git show --name-only --oneline"
@@ -95,7 +94,7 @@ mdRead = mdFile.read()
 attributes = mdRead.split('---')[1]
 lineVal = attributes.split('\n')
 
-os.system("sh clone.sh")
+os.system("sh clone.sh %s" %(git_password))
 manifestRead = open("/home/travis/build/kapils-repos/Developer-Repo-New/Config-Repo/manifest.json", 'r')
 data = json.load(manifestRead)
 
@@ -130,7 +129,7 @@ if lineVal[1].split(':')[0] != "id":
 
     writeToJSONFile(data)
 
-    os.system("sh developer_repo_clone.sh")
+    os.system("sh developer_repo_clone.sh %s" %(git_password))
     newFile = open("/home/travis/build/kapils-repos/Developer-Repo-New/Developer-Repo-New/"+category+"/newFile.md","w+")
     newFile.write("---")
     newFile.write("\nid: \""+artifactKey+"\"")
@@ -144,9 +143,9 @@ if lineVal[1].split(':')[0] != "id":
     os.remove(fileLocation)
     os.rename("/home/travis/build/kapils-repos/Developer-Repo-New/Developer-Repo-New/"+category+"/newFile.md", "/home/travis/build/kapils-repos/Developer-Repo-New/Developer-Repo-New/"+file)
 
-    os.system("sh repo_merge.sh")
+    os.system("sh repo_merge.sh %s" %(git_password))
 
-    os.system("sh merge.sh")
+    os.system("sh merge.sh %s" %(git_password))
     to=userName+'@talend.com'
     subject='CWR Upload Notification'
     message='Hi, Your artifact titled '+lineVal[1].split(':')[1].strip().replace("\"", "")+' has been uploaded. The artifact ID is #'+artifactKey+' and will be published on approval.'
@@ -196,7 +195,7 @@ else :
         os.rename('/home/travis/build/kapils-repos/Developer-Repo-New/Config-Repo/manifest_new.json',
                   '/home/travis/build/kapils-repos/Developer-Repo-New/Config-Repo/manifest.json')
 
-        os.system("sh developer_repo_clone.sh")
+        os.system("sh developer_repo_clone.sh %s" %(git_password))
         newFile = open("/home/travis/build/kapils-repos/Developer-Repo-New/Developer-Repo-New/" + category + "/newFile.md", "w+")
         newFile.write("---")
         newFile.write("\nid: \"" + lineVal[1].split(':')[1].strip().replace("\"", "") + "\"")
@@ -213,9 +212,9 @@ else :
         os.rename("/home/travis/build/kapils-repos/Developer-Repo-New/Developer-Repo-New/" + category + "/newFile.md",
                   "/home/travis/build/kapils-repos/Developer-Repo-New/Developer-Repo-New/" + file)
 
-        os.system("sh repo_merge.sh")
+        os.system("sh repo_merge.sh %s" %(git_password))
 
-        os.system("sh merge.sh")
+        os.system("sh merge.sh %s" %(git_password))
         to=lineVal[5].split(':')[1].strip().replace("\"", "")+'@talend.com'
         subject='CWR Upload Notification'
         message='Hi, Your updated artifact, titled '+lineVal[2].split(':')[1].strip().replace("\"", "")+' has been uploaded. The artifact ID is #'+lineVal[1].split(':')[1].strip().replace("\"", "")+' and will be published on approval.'
