@@ -114,7 +114,7 @@ if lineVal[1].split(':')[0] != "id":
     file_arr = files.split(',')
 
     for i in range(1, len(file_arr) - 1):
-        x = file_arr[i].replace('/', '/'+artifactKey+'/')
+        files_new = file_arr[i].replace('/', '/'+artifactKey+'/')
         if i < len(file_arr) - 2:
             files_new = files_new + ","
 
