@@ -1,7 +1,10 @@
 ---
+id: "DI0002"
 artifactTitle: "How to run a talend job"
 talendVersion: "7.1.1"
 artifactTags: "talend,bigdata"
+author: "kapils-repos"
+artifactVersion: "1"
 ---
 
 ##How to run a talend job
