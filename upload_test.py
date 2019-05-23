@@ -56,7 +56,10 @@ def getUsername(hash_code):
         'https://api.github.com/repos/kapils-repos/Developer-Repo-New/commits/'+hash_code,auth=('kapils-repos', 'Kgithub2019'))
     data=response.content
     json_data=json.loads(data)
-    return json_data['author']['login'].replace("-talend","")
+    if (json_data['author']!=None):
+        return json_data['author']['login'].replace("-talend", "")
+    else:
+        return "Travis CI"
 
 
 def main():
