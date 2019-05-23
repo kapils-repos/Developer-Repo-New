@@ -87,6 +87,7 @@ def main():
             files = files +","
 
     fileLocation="/home/travis/build/kapils-repos/Developer-Repo-New/"+file
+    artifactUrl="https://github.com/kapils-repos/Developer-Repo-New/blob/master/"+file
     print(files)
     category=file.split("/")[0]
     mdFile = open(fileLocation, 'r', encoding='utf-8')
@@ -115,6 +116,7 @@ def main():
         attrToManifest[lineVal[2].split(':')[0]]=lineVal[2].split(':')[1].strip().replace("\"", "")
         attrToManifest["originSource"]="Developer-Repo"
         attrToManifest["destination"]=""
+        attrToManifest["artifactUrl"]=artifactUrl
         attrToManifest["fileNames"]=files
         attrToManifest["category"]=category
         attrToManifest["createdDate"]=datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
@@ -180,6 +182,7 @@ def main():
                     data['artifacts'][i]['artifactVersion'] = str(version)
                     data['artifacts'][i]['talendVersion'] = lineVal[3].split(':')[1].strip().replace("\"", "")
                     data['artifacts'][i]['destination'] = ""
+                    data['artifacts'][i]['artifactUrl'] = artifactUrl
                     data['artifacts'][i]['fileNames'] = newFiles
                     data['artifacts'][i]['lastUpdatedDate'] = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
                     data['artifacts'][i]['status'] = "Updated"
