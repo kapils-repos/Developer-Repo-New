@@ -1,3 +1,3 @@
-# API
+# Data Preparation
 
-This folder contains the artifacts related to API by kharindran.
+This folder contains the artifacts related to Data Preparation by kharindran.
