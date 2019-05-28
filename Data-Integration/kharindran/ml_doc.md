@@ -7,6 +7,6 @@ author: "kharindran"
 artifactVersion: "1"
 ---
 
-# Call ML script from talend
+## Call ML script from talend
 
 This is a dummy article created to walk you through how to run ML script in talend.
