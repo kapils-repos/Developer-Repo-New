@@ -56,8 +56,8 @@ def getUsername(hash_code):
         'https://api.github.com/repos/kapils-repos/Developer-Repo-New/commits/'+hash_code,auth=('kapils-repos', 'Kgithub2019'))
     data=response.content
     json_data=json.loads(data)
-    if (json_data['author']!=None):
-        return json_data['author']['login'].replace("-talend", "")
+    if ('@talend.com' in json_data['commit']['author']['email']):
+        return json_data['commit']['author']['email']
     else:
         return "Travis CI"
 
@@ -150,10 +150,11 @@ def main():
         os.system("sh repo_merge.sh %s" %(git_password))
 
         os.system("sh merge.sh %s" %(git_password))
-        to=userName+'@talend.com'
+        to=userName
         subject='CWR Upload Notification'
         message='Hi, Your artifact titled '+lineVal[1].split(':')[1].strip().replace("\"", "")+' has been uploaded. The artifact ID is #'+artifactKey+' and will be published on approval.'
-        notification(to, subject, message)
+        if(to != 'Travis CI'):
+            notification(to, subject, message)
     else :
         l = len(data['artifacts'])
         flag = "N"
@@ -220,10 +221,12 @@ def main():
             os.system("sh repo_merge.sh %s" %(git_password))
 
             os.system("sh merge.sh %s" %(git_password))
-            to=lineVal[5].split(':')[1].strip().replace("\"", "")+'@talend.com'
+            #to=lineVal[5].split(':')[1].strip().replace("\"", "")+'@talend.com'
+            to=userName
             subject='CWR Upload Notification'
             message='Hi, Your updated artifact, titled '+lineVal[2].split(':')[1].strip().replace("\"", "")+' has been uploaded. The artifact ID is #'+lineVal[1].split(':')[1].strip().replace("\"", "")+' and will be published on approval.'
-            notification(to, subject, message)
+            if (to != 'Travis CI'):
+                notification(to, subject, message)
 
         else:
             print("Artifact version is the latest")
