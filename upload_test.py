@@ -114,7 +114,7 @@ def main():
         attrToManifest={}
         attrToManifest["artifactKey"]=artifactKey
         attrToManifest[lineVal[1].split(':')[0]]=lineVal[1].split(':')[1].strip().replace("\"", "")
-        attrToManifest["author"]=userName
+        attrToManifest["author"]=userName.replace("@talend.com","")
         attrToManifest["artifactVersion"]="1"
         attrToManifest[lineVal[2].split(':')[0]]=lineVal[2].split(':')[1].strip().replace("\"", "")
         attrToManifest["originSource"]="Developer-Repo"
