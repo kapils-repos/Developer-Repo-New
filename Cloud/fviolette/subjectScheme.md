@@ -1,7 +1,10 @@
 ---
+id: "Cl0001"
 artifactTitle: SubjectScheme Map
 talendVersion: 7.1.1
 artifactTags: Documentation, DITA, Taxonomy
+author: "Travis CI"
+artifactVersion: "1"
 ---
 
 # SubjectScheme map 
