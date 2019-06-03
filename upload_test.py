@@ -50,10 +50,10 @@ def notification(to_mail, subject, message):
     print(response)
 
 
-def getUsername(hash_code):
+def getUsername(hash_code, git_password):
     print("The hashcode is "+hash_code)
     response = requests.get(
-        'https://api.github.com/repos/kapils-repos/Developer-Repo-New/commits/'+hash_code,auth=('kapils-repos', 'Kgithub2019'))
+        'https://api.github.com/repos/kapils-repos/Developer-Repo-New/commits/'+hash_code,auth=('kapils-repos', git_password))
     data=response.content
     json_data=json.loads(data)
     if ('@talend.com' in json_data['commit']['author']['email']):
@@ -72,7 +72,7 @@ def main():
     hash=subprocess.check_output(hash_code_cmd, shell=True)
     hash_code_str=str(hash)
     hash_code=hash_code_str.split("'")
-    userName=getUsername(hash_code[1].rstrip("\\n"))
+    userName=getUsername(hash_code[1].rstrip("\\n"), git_password)
     print("Username is "+userName)
 
     output=subprocess.check_output(cmd, shell=True)
