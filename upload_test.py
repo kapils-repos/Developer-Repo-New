@@ -100,7 +100,7 @@ def main():
 
     #output=subprocess.check_output(cmd, shell=True)
     #val=str(output)
-    list = val.split('\\n')
+    list = files.split(',')
     print(list)
     #files=""
     for x in list:
