@@ -61,6 +61,21 @@ def getUsername(hash_code, git_password):
     else:
         return "Travis CI"
 
+def gitApiCall(hash_code, git_password):
+    response = requests.get(
+        'https://api.github.com/repos/kapils-repos/Developer-Repo-New/commits/' + hash_code,
+        auth=('kapils-repos', git_password))
+    data = response.content
+    api_output = json.loads(data)
+    files_uploaded = ""
+    for i in range(0, len(api_output['files'])):
+        files_uploaded = files_uploaded + api_output['files'][i]['filename']
+        if i < len(api_output['files'])-1:
+            files_uploaded = files_uploaded + ","
+    first_hash = api_output['parents'][len(api_output['parents'])-1]['sha']
+    output = first_hash+"|"+files_uploaded
+    return output
+
 
 def main():
     git_password=sys.argv[1]
@@ -72,22 +87,30 @@ def main():
     hash=subprocess.check_output(hash_code_cmd, shell=True)
     hash_code_str=str(hash)
     hash_code=hash_code_str.split("'")
-    userName=getUsername(hash_code[1].rstrip("\\n"), git_password)
+
+    api_output = gitApiCall(hash_code[1].rstrip("\\n"), git_password)
+
+    first_hash = api_output.split('|')[0]
+    files = api_output.split('|')[1]
+
+    print("First hash is "+first_hash)
+
+    userName=getUsername(first_hash, git_password)
     print("Username is "+userName)
 
-    output=subprocess.check_output(cmd, shell=True)
-    val=str(output)
+    #output=subprocess.check_output(cmd, shell=True)
+    #val=str(output)
     list = val.split('\\n')
     print(list)
-    files=""
+    #files=""
     for x in list:
         if x.find('.md')!=-1:
             file=x
 
-    for i in range(1,len(list)-1):
-        files=files+list[i]
-        if i<len(list)-2:
-            files = files +","
+    #for i in range(1,len(list)-1):
+     #   files=files+list[i]
+      #  if i<len(list)-2:
+       #     files = files +","
 
     fileLocation="/home/travis/build/kapils-repos/Developer-Repo-New/"+file
     artifactUrl="https://github.com/kapils-repos/Developer-Repo-New/blob/master/"+file
@@ -138,7 +161,7 @@ def main():
         newFile.write("---")
         newFile.write("\nid: \""+artifactKey+"\"")
         newFile.write(attributes)
-        newFile.write("author: \""+userName+"\"")
+        newFile.write("author: \""+userName.replace("@talend.com","")+"\"")
         newFile.write("\nartifactVersion: \"1\"")
         newFile.write("\n---")
         newFile.write(mdRead.split('---')[2])
