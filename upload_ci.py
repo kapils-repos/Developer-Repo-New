@@ -38,25 +38,25 @@ def keyGen(key,num):
 
 #Function to trigger a mail to the contributor
 def upload_notification(to_mail, artifact_title, artifact_id, artifact_url):
-    print(to_mail+' '+subject+' '+message)
+    print(to_mail+' '+artifact_title+' '+artifact_id+' '+artifact_url)
     headers = {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
         'Authorization': 'Basic a2hhcmluZHJhbkBjc2EudGFsZW5kLmNvbTpLQHRhbGVuZGNsb3VkMjAxOA==',
     }
-    data = '{ \\ \n   "executable": "5d00a480b0daaa43cfc678a2", \\ \n   "parameters": { \\ \n     "to_email": "'+to_mail+'", \\ \n     "artifact_title": "'+artifact_title+'", \\ \n "artifact_id": "'+artifact_id+'", \\ \n "artifact_url": "'+artifact_url+'" \\ \n   } \\ \n }'
+    data = '{ \n   "executable": "5d00a480b0daaa43cfc678a2", \n   "parameters": {\n     "to_email": "'+to_mail+'", \n     "artifact_title": "'+artifact_title+'", \n     "artifact_id": "'+artifact_id+'", \n     "artifact_url": "'+artifact_url+'"\n   }\n }'
     response = requests.post('https://api.eu.cloud.talend.com/tmc/v1.2/executions', headers=headers, data=data)
     print('Below is the response code')
     print(response)
 
 def update_notification(to_mail, artifact_title, artifact_id, artifact_url):
-    print(to_mail+' '+subject+' '+message)
+    print(to_mail + ' ' + artifact_title + ' ' + artifact_id + ' ' + artifact_url)
     headers = {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
         'Authorization': 'Basic a2hhcmluZHJhbkBjc2EudGFsZW5kLmNvbTpLQHRhbGVuZGNsb3VkMjAxOA==',
     }
-    data = '{ \\ \n   "executable": "5d00a45ab0daaa43cfc6789e", \\ \n   "parameters": { \\ \n     "to_email": "'+to_mail+'", \\ \n     "artifact_title": "'+artifact_title+'", \\ \n "artifact_id": "'+artifact_id+'", \\ \n "artifact_url": "'+artifact_url+'" \\ \n   } \\ \n }'
+    data = '{ \n   "executable": "5d00a45ab0daaa43cfc6789e", \n   "parameters": {\n     "to_email": "'+to_mail+'", \n     "artifact_title": "'+artifact_title+'", \n     "artifact_id": "'+artifact_id+'", \n     "artifact_url": "'+artifact_url+'"\n   }\n }'
     response = requests.post('https://api.eu.cloud.talend.com/tmc/v1.2/executions', headers=headers, data=data)
     print('Below is the response code')
     print(response)
