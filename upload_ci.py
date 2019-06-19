@@ -125,7 +125,7 @@ def main():
        #     files = files +","
 
     fileLocation="/home/travis/build/kapils-repos/Developer-Repo-New/"+file
-    artifactUrl="https://github.com/kapils-repos/Developer-Repo-New/tree/master/"+file[:file.rindex('/')]
+    artifactUrl="https://github.com/kapils-repos/Developer-Repo-New/tree/master/"+file[:file.rindex('\\')]
     print(files)
     category=file.split("/")[0]
     mdFile = open(fileLocation, 'r', encoding='utf-8')
@@ -155,7 +155,7 @@ def main():
         attrToManifest["author"]=userName.replace("@talend.com","")
         attrToManifest["artifactVersion"]="1"
         attrToManifest["talendVersion"]=talendVersion
-        attrToManifest["originSource"]="Developer-Repo"
+        attrToManifest["originSource"]="kapils-repos/Developer-Repo-New"
         attrToManifest["destination"]=""
         attrToManifest["artifactUrl"]=artifactUrl
         attrToManifest["fileNames"]=files
