@@ -125,7 +125,7 @@ def main():
        #     files = files +","
 
     fileLocation="/home/travis/build/kapils-repos/Developer-Repo-New/"+file
-    artifactUrl="https://github.com/kapils-repos/Developer-Repo-New/tree/master/"+file[:file.rindex('\\')]
+    artifactUrl="https://github.com/kapils-repos/Developer-Repo-New/tree/master/"+file[:file.rindex('/')]
     print(files)
     category=file.split("/")[0]
     mdFile = open(fileLocation, 'r', encoding='utf-8')
