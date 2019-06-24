@@ -1,5 +1,5 @@
 ---
-id: "AP0001"
+id: "BD0001"
 artifactTitle: "Lorem Ipsum"
 talendVersion: "5.1.0"
 artifactTags: "lorem,ipsum"
